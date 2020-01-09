@@ -1,0 +1,584 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.3.6 beta 1" />
+<title>AsciiDoc API</title>
+<style type="text/css">
+/* Debug borders */
+p, li, dt, dd, div, pre, h1, h2, h3, h4, h5, h6 {
+/*
+  border: 1px solid red;
+*/
+}
+
+body {
+  margin: 1em 5% 1em 5%;
+}
+
+a {
+  color: blue;
+  text-decoration: underline;
+}
+a:visited {
+  color: fuchsia;
+}
+
+em {
+  font-style: italic;
+  color: navy;
+}
+
+strong {
+  font-weight: bold;
+  color: #083194;
+}
+
+tt {
+  color: navy;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #527bbd;
+  font-family: sans-serif;
+  margin-top: 1.2em;
+  margin-bottom: 0.5em;
+  line-height: 1.3;
+}
+
+h1, h2, h3 {
+  border-bottom: 2px solid silver;
+}
+h2 {
+  padding-top: 0.5em;
+}
+h3 {
+  float: left;
+}
+h3 + * {
+  clear: left;
+}
+
+div.sectionbody {
+  font-family: serif;
+  margin-left: 0;
+}
+
+hr {
+  border: 1px solid silver;
+}
+
+p {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+ul, ol, li > p {
+  margin-top: 0;
+}
+
+pre {
+  padding: 0;
+  margin: 0;
+}
+
+span#author {
+  color: #527bbd;
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+span#email {
+}
+span#revision {
+  font-family: sans-serif;
+}
+
+div#footer {
+  font-family: sans-serif;
+  font-size: small;
+  border-top: 2px solid silver;
+  padding-top: 0.5em;
+  margin-top: 4.0em;
+}
+div#footer-text {
+  float: left;
+  padding-bottom: 0.5em;
+}
+div#footer-badges {
+  float: right;
+  padding-bottom: 0.5em;
+}
+
+div#preamble {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+div.tableblock, div.imageblock, div.exampleblock, div.verseblock,
+div.quoteblock, div.literalblock, div.listingblock, div.sidebarblock,
+div.admonitionblock {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+div.admonitionblock {
+  margin-top: 2.5em;
+  margin-bottom: 2.5em;
+}
+
+div.content { /* Block element content. */
+  padding: 0;
+}
+
+/* Block element titles. */
+div.title, caption.title {
+  color: #527bbd;
+  font-family: sans-serif;
+  font-weight: bold;
+  text-align: left;
+  margin-top: 1.0em;
+  margin-bottom: 0.5em;
+}
+div.title + * {
+  margin-top: 0;
+}
+
+td div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content + div.title {
+  margin-top: 0.0em;
+}
+
+div.sidebarblock > div.content {
+  background: #ffffee;
+  border: 1px solid silver;
+  padding: 0.5em;
+}
+
+div.listingblock > div.content {
+  border: 1px solid silver;
+  background: #f4f4f4;
+  padding: 0.5em;
+}
+
+div.quoteblock {
+  padding-left: 2.0em;
+  margin-right: 10%;
+}
+div.quoteblock > div.attribution {
+  padding-top: 0.5em;
+  text-align: right;
+}
+
+div.verseblock {
+  padding-left: 2.0em;
+  margin-right: 10%;
+}
+div.verseblock > div.content {
+  white-space: pre;
+}
+div.verseblock > div.attribution {
+  padding-top: 0.75em;
+  text-align: left;
+}
+/* DEPRECATED: Pre version 8.2.7 verse style literal block. */
+div.verseblock + div.attribution {
+  text-align: left;
+}
+
+div.admonitionblock .icon {
+  vertical-align: top;
+  font-size: 1.1em;
+  font-weight: bold;
+  text-decoration: underline;
+  color: #527bbd;
+  padding-right: 0.5em;
+}
+div.admonitionblock td.content {
+  padding-left: 0.5em;
+  border-left: 2px solid silver;
+}
+
+div.exampleblock > div.content {
+  border-left: 2px solid silver;
+  padding: 0.5em;
+}
+
+div.imageblock div.content { padding-left: 0; }
+div.imageblock img { border: 1px solid silver; }
+span.image img { border-style: none; }
+
+dl {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+dt {
+  margin-top: 0.5em;
+  margin-bottom: 0;
+  font-style: normal;
+  color: navy;
+}
+dd > *:first-child {
+  margin-top: 0.1em;
+}
+
+ul, ol {
+    list-style-position: outside;
+}
+ol.arabic {
+  list-style-type: decimal;
+}
+ol.loweralpha {
+  list-style-type: lower-alpha;
+}
+ol.upperalpha {
+  list-style-type: upper-alpha;
+}
+ol.lowerroman {
+  list-style-type: lower-roman;
+}
+ol.upperroman {
+  list-style-type: upper-roman;
+}
+
+div.compact ul, div.compact ol,
+div.compact p, div.compact p,
+div.compact div, div.compact div {
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
+}
+
+div.tableblock > table {
+  border: 3px solid #527bbd;
+}
+thead {
+  font-family: sans-serif;
+  font-weight: bold;
+}
+tfoot {
+  font-weight: bold;
+}
+td > div.verse {
+  white-space: pre;
+}
+p.table {
+  margin-top: 0;
+}
+/* Because the table frame attribute is overriden by CSS in most browsers. */
+div.tableblock > table[frame="void"] {
+  border-style: none;
+}
+div.tableblock > table[frame="hsides"] {
+  border-left-style: none;
+  border-right-style: none;
+}
+div.tableblock > table[frame="vsides"] {
+  border-top-style: none;
+  border-bottom-style: none;
+}
+
+
+div.hdlist {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+div.hdlist tr {
+  padding-bottom: 15px;
+}
+dt.hdlist1.strong, td.hdlist1.strong {
+  font-weight: bold;
+}
+td.hdlist1 {
+  vertical-align: top;
+  font-style: normal;
+  padding-right: 0.8em;
+  color: navy;
+}
+td.hdlist2 {
+  vertical-align: top;
+}
+div.hdlist.compact tr {
+  margin: 0;
+  padding-bottom: 0;
+}
+
+.comment {
+  background: yellow;
+}
+
+@media print {
+  div#footer-badges { display: none; }
+}
+
+div#toctitle {
+  color: #527bbd;
+  font-family: sans-serif;
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-top: 1.0em;
+  margin-bottom: 0.1em;
+}
+
+div.toclevel1, div.toclevel2, div.toclevel3, div.toclevel4 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+div.toclevel2 {
+  margin-left: 2em;
+  font-size: 0.9em;
+}
+div.toclevel3 {
+  margin-left: 4em;
+  font-size: 0.9em;
+}
+div.toclevel4 {
+  margin-left: 6em;
+  font-size: 0.9em;
+}
+</style>
+</head>
+<body>
+<div id="header">
+<h1>AsciiDoc API</h1>
+</div>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph"><p><em>asciidocapi</em>&#8201;&#8212;&#8201;a Python API module for <em><em>AsciiDoc</em></em>.</p></div>
+</div>
+</div>
+<h2 id="_introduction">Introduction</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>The <em>asciidocapi</em> module implements a Python API for <em>AsciiDoc</em>. It
+allows you to set <tt>asciidoc(1)</tt> program options, compile an <em>AsciiDoc</em>
+source file and then interrogate the results.  The <tt>asciidocapi.py</tt>
+module file contains the <tt>AsciiDocAPI</tt> wrapper class for
+<tt>asciidoc.py</tt>.</p></div>
+<div class="ulist"><div class="title">Benefits</div><ul>
+<li>
+<p>
+Stable API Shields the user from the undocumented and possibly
+  volatile <tt>asciidoc.py</tt> internals.
+</p>
+</li>
+<li>
+<p>
+Easier to use and more flexible than the alternative of running
+  <tt>asciidoc(1)</tt> as a separate process.
+</p>
+</li>
+<li>
+<p>
+Executes inside your application (better performance than running
+  separate <tt>asciidoc(1)</tt> command processes).
+</p>
+</li>
+</ul></div>
+</div>
+<h2 id="_using_asciidocapi">Using asciidocapi</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>To use the API just drop the <tt>asciidocapi.py</tt> file into your
+application directory, import it and use the <tt>AsciiDocAPI</tt> class.  The
+only requirement is that a compatible version of <em><em>AsciiDoc</em></em> is already
+installed&#8201;&#8212;&#8201;simple, no setuptools to run, no Eggs to install, no
+non-standard library dependencies.</p></div>
+<div class="paragraph"><p>Verify everything is working by running the module doctests:</p></div>
+<div class="literalblock">
+<div class="content">
+<pre><tt>python asciidocapi.py</tt></pre>
+</div></div>
+<div class="paragraph"><p>If there are no messages then all is well.</p></div>
+<div class="paragraph"><p>The following minimal example compiles <tt>mydoc.txt</tt> to <tt>mydoc.html</tt>:</p></div>
+<div class="listingblock">
+<div class="content"><!-- Generator: GNU source-highlight 2.4
+by Lorenzo Bettini
+http://www.lorenzobettini.it
+http://www.gnu.org/software/src-highlite -->
+<pre><tt><span style="font-weight: bold"><span style="color: #000080">from</span></span> asciidocapi <span style="font-weight: bold"><span style="color: #000080">import</span></span> <span style="color: #009900">AsciiDocAPI</span>
+asciidoc <span style="color: #990000">=</span> <span style="font-weight: bold"><span style="color: #000000">AsciiDocAPI</span></span><span style="color: #990000">()</span>
+asciidoc<span style="color: #990000">.</span><span style="font-weight: bold"><span style="color: #000000">execute</span></span><span style="color: #990000">(</span><span style="color: #FF0000">'mydoc.txt'</span><span style="color: #990000">)</span></tt></pre></div></div>
+<div class="paragraph"><p>The next interactive example uses file-like objects for input and output:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>&gt;&gt;&gt; from asciidocapi import AsciiDocAPI
+&gt;&gt;&gt; import StringIO
+&gt;&gt;&gt; infile = StringIO.StringIO('Hello *{author}*')
+&gt;&gt;&gt; outfile = StringIO.StringIO()
+&gt;&gt;&gt; asciidoc = AsciiDocAPI()
+&gt;&gt;&gt; asciidoc.options('--no-header-footer')
+&gt;&gt;&gt; asciidoc.attributes['author'] = 'Joe Bloggs'
+&gt;&gt;&gt; asciidoc.execute(infile, outfile, backend='html4')
+&gt;&gt;&gt; print outfile.getvalue()
+&lt;p&gt;Hello &lt;strong&gt;Joe Bloggs&lt;/strong&gt;&lt;/p&gt;
+
+&gt;&gt;&gt;</tt></pre>
+</div></div>
+</div>
+<h2 id="_implementation_goals">Implementation Goals</h2>
+<div class="sectionbody">
+<div class="paragraph"><div class="title">Leverage existing knowledge</div><p>The API maps directly onto the <tt>asciidoc(1)</tt> command&#8201;&#8212;&#8201;this is
+deliberate&#8201;&#8212;&#8201;if you know the <tt>asciidoc(1)</tt> command learning the API
+will be trivial. A nice side effect of this goal is that API and
+command-line modes share the same code&#8201;&#8212;&#8201;virtually no <tt>asciidoc(1)</tt>
+code is specific to API usage.</p></div>
+<div class="paragraph"><div class="title">Simplicity</div><p>The <em>AsciiDocAPI</em> class contains just one method plus a few attributes
+for options and result messages.</p></div>
+<div class="paragraph"><div class="title">Loose coupling</div><p>The dependency between <tt>asciidocapi.py</tt> and <tt>asciidoc.py</tt> is minimal&#8201;&#8212;&#8201;the current <tt>asciidocapi.py</tt> module uses only two attributes and
+one function from the <tt>asciidoc.py</tt> module.</p></div>
+<div class="paragraph"><div class="title">Why isn&#8217;t the API baked right into the asciidoc.py command script?</div><p>You can&#8217;t just drop <tt>asciidoc.py</tt> into your application because it
+requires all the related config files and filters&#8201;&#8212;&#8201;complex and
+unnecessary since all this was already done when you installed
+<em>AsciiDoc</em>.</p></div>
+</div>
+<h2 id="_api_reference">API reference</h2>
+<div class="sectionbody">
+<h3 id="X2">Class <tt>AsciiDocAPI(object)</tt></h3>
+<div class="paragraph"><p>This is the <em><em>AsciiDoc</em></em> API class.</p></div>
+<h4 id="_instance_attributes">Instance attributes</h4>
+<div class="dlist"><dl>
+<dt class="hdlist1">
+<tt>asciidoc</tt>
+</dt>
+<dd>
+<p>
+The imported <tt>asciidoc.py</tt> module.
+</p>
+</dd>
+<dt class="hdlist1">
+<tt>attributes</tt>
+</dt>
+<dd>
+<p>
+A dictionary of <em>AsciiDoc</em> attribute values.
+</p>
+</dd>
+<dt class="hdlist1">
+<tt>cmd</tt>
+</dt>
+<dd>
+<p>
+The file path of the <tt>asciidoc.py</tt> script. Set by the <tt>__init__</tt>
+method.
+</p>
+</dd>
+<dt class="hdlist1">
+<tt>messages</tt>
+</dt>
+<dd>
+<p>
+A chronologically ordered list of message strings generated during
+<em>AsciiDoc</em> execution (last message at the end of the list).
+</p>
+</dd>
+<dt class="hdlist1">
+<tt>options</tt>
+</dt>
+<dd>
+<p>
+An instance of the <a href="#X1">Options class</a>. Contains a list of
+<em>AsciiDoc</em> command options.
+</p>
+</dd>
+</dl></div>
+<h4 id="_instance_methods">Instance methods</h4>
+<div class="dlist"><dl>
+<dt class="hdlist1">
+<tt>__init__(self, asciidoc_py=None)</tt>
+</dt>
+<dd>
+<p>
+Locate and import <tt>asciidoc.py</tt> module and verify API compatibility.
+Initialize instance attributes. A search for the <tt>asciidoc</tt> module is
+made in the following order:
+</p>
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+Use the <tt>ASCIIDOC_PY</tt> environment variable if it is set.
+</p>
+</li>
+<li>
+<p>
+Use the <tt>asciidoc_py</tt> argument if it is set.
+</p>
+</li>
+<li>
+<p>
+Search the environment <em>PATH</em> for <tt>asciidoc</tt>, <tt>asciidoc.py</tt> and
+  <tt>asciidoc.pyc</tt> (in that order).
+</p>
+</li>
+<li>
+<p>
+Finally look for <tt>asciidoc.py</tt> in the current working directory.
+</p>
+</li>
+</ol></div>
+</dd>
+<dt class="hdlist1">
+<tt>execute(self, infile, outfile=None, backend=None)</tt>
+</dt>
+<dd>
+<p>
+Compile <tt>infile</tt> to <tt>outfile</tt> using backend format.  <tt>infile</tt> and
+<tt>outfile</tt> can be file path strings or file-like objects. <tt>backend</tt> is
+name of <em><em>AsciiDoc</em></em> backend (takes same values as <tt>asciidoc(1)</tt> command
+<tt>--backend</tt> option). If <tt>outfile</tt> or <tt>backend</tt> are <tt>None</tt> then their
+respective <tt>asciidoc(1)</tt> defaults are used.
+</p>
+</dd>
+</dl></div>
+<h3 id="X1">Class <tt>Options(object)</tt></h3>
+<div class="paragraph"><p>Stores <tt>asciidoc(1)</tt> command options.</p></div>
+<h4 id="_instance_attributes_2">Instance attributes</h4>
+<div class="dlist"><dl>
+<dt class="hdlist1">
+<tt>values</tt>
+</dt>
+<dd>
+<p>
+The list of <tt>(name,value)</tt> command option tuples.
+</p>
+</dd>
+</dl></div>
+<h4 id="_instance_methods_2">Instance methods</h4>
+<div class="dlist"><dl>
+<dt class="hdlist1">
+<tt>__call__(self, name, value=None)</tt>
+</dt>
+<dd>
+<p>
+A shortcut for the <tt>append</tt> method. Example:
+</p>
+<div class="literalblock">
+<div class="content">
+<pre><tt>options('--verbose')</tt></pre>
+</div></div>
+</dd>
+<dt class="hdlist1">
+<tt>append(self, name, value=None)</tt>
+</dt>
+<dd>
+<p>
+Append <tt>(name,value)</tt> to the options list. Example:
+</p>
+<div class="literalblock">
+<div class="content">
+<pre><tt>options.append('--conf-file', 'blog.conf')</tt></pre>
+</div></div>
+</dd>
+</dl></div>
+<h3 id="_class_tt_asciidocerror_exception_tt">Class <tt>AsciiDocError(Exception)</tt></h3>
+<div class="paragraph"><p>Thrown by the <a href="#X2">AsciiDocAPI class</a> when an <em><em>AsciiDoc</em></em> execution
+error occurs.</p></div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2009-03-05 19:01:39 NZDT
+</div>
+</div>
+</body>
+</html>

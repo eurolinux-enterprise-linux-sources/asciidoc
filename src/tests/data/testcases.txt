@@ -1,0 +1,354 @@
+//
+// A collection of AsciiDoc test cases.
+//
+
+Test Cases
+==========
+:author: Joe Bloggs
+
+
+== Author attributes ==
+Hello *{author}* ({firstname} {lastname}, {authorinitials}).
+
+
+== Quoted text attributes ==
+[green,yellow,2]##fun with text##.
+More [red,black,4]*fun with text*.
+Yet more [red,,1.5]**fun with text**.
+Yet more [red,,1.5]+fun with text+.
+Yet more [red,,1.5]`fun with text`.
+
+Yet more [red,,1.5]'fun with text'.
+Yet more [red,,1.5]_fun with text_.
+Yet more [orange]'fun with text'.
+
+
+== Break list nesting ==
+1. List 1.
+2. List 1.
+
+// New list.
+a. List 2.
+b. List 2.
+
+
+== Listing Blocks ==
+[subs="quotes"]
+------------------------------------------
+$ ls *-al*
+------------------------------------------
+
+[listing]
+..........................................
+[subs="quotes"]
+------------------------------------------
+$ ls *-al*
+------------------------------------------
+..........................................
+
+
+[[X1,anchor reftext]]
+== Links ==
+An [[X2]] inline anchor.
+An [[X3, anchor reftext]] inline anchor with reftext.
+
+<<X1>>; captioned link to <<X1,this test case>>.
+
+<<X2>> link to inline anchor; captioned link to <<X2,inline anchor>>.
+
+Link to <<X3>> anchor.
+
+
+== Titles ==
+
+[float]
+===== Level 4 =====
+[float]
+==== Level 3 ====
+[float]
+=== Level 2 ===
+[float]
+== Level 1 ==
+[float]
+Level 4
++++++++
+[float]
+Level 3
+^^^^^^^
+[float]
+Level 2
+~~~~~~~
+[float]
+Level 1
+-------
+
+.Block title
+Lorum ipsum.
+
+
+== Lists ==
+
+Bulleted:
+
+- item text
+* item text
+** item text
+*** item text
+**** item text
+***** item text
+
+Numbered:
+
+1. arabic (decimal) numbering
+a. loweralpha numbering
+A. upperalpha numbering
+i) lowerroman numbering
+I) upperroman numbering
+. arabic (decimal) numbering
+.. loweralpha numbering
+... lowerroman numbering
+.... upperalpha numbering
+..... upperroman numbering
+
+Labeled:
+
+label:: item text
+label;; item text
+label::: item text
+label:::: item text
+
+With item anchor:
+
+one:: Item one.
+[[item_two]]two:: Item two.
+three:: Item three.
+
+
+== Inline passthroughs ==
+
+- Test pass:[`ABC`].
+- Test `pass:[ABC]`.
+- The `++i` and `++j` auto-increments.
+- Paths `~/.vim` and `~/docs`.
+- The `__init__` method.
+- The `{id}` attribute.
+
+
+== Images
+
+=== Block images
+
+[[tiger_image]]
+.Tyger tyger
+image::../../images/tiger.png[]
+
+:height: 250
+:width: 350
+.Tyger tyger two
+image::../../images/tiger.png[caption="Figure 2: "]
+:height!:
+:width!:
+
+// Images and icons directories.
+:imagesdir: ../../doc
+image::music2.png[]
+:imagesdir!:
+
+:icons:
+:iconsdir:  ../../images/icons
+NOTE: Lorum ipsum.
+
+:icons!:
+
+
+== Admonishments
+
+NOTE: Lorum ipsum.
+
+TIP: Lorum ipsum.
+
+WARNING: Lorum ipsum.
+
+CAUTION: Lorum ipsum.
+
+IMPORTANT: Lorum ipsum.
+
+// With icon images.
+:icons:
+:iconsdir:  ../../images/icons
+
+NOTE: Lorum ipsum.
+
+TIP: Lorum ipsum.
+
+WARNING: Lorum ipsum.
+
+CAUTION: Lorum ipsum.
+
+IMPORTANT: Lorum ipsum.
+
+:icons!:
+
+== Backslash escapes
+
+.Apostrophe
+Don't vs don\'t.
+
+.Exceptions
+There are a number of  exceptions to the usual single backslash rule
+-- mostly relating to URL macros that  have two syntaxes or quoting
+ambiguity.  Here are some non-standard escape examples:
+
+[cols="l,v",width="40%",options="header"]
+|========================================
+|AsciiDoc | Renders
+
+2*|
+\srackham@methods.co.nz
+<\srackham@methods.co.nz>
+\mailto:[\srackham@methods.co.nz]
+
+2*|
+\http://www.foo1.co.nz
+\\http://www.foobar.com[]
+\\http://www.foobar.com[Foobar Limited]
+
+2*|
+A C\++ Library for C++
+\\``double-quotes''
+\*\*F**ile Open\...
+|========================================
+
+
+== Paragraphs
+
+.Normal paragraph
+This is a *bold* a line
+This is a 'strong' line
+This is another _strong_ line
+
+.Literal paragraph
+[literal]
+This is a *bold* a line
+This is a 'strong' line
+This is another _strong_ line
+
+.Verse paragraph
+[verse]
+This is a *bold* a line
+This is a 'strong' line
+This is another _strong_ line
+
+.Indented (literal) paragraph
+  This is a *bold* a line
+  This is a 'strong' line
+  This is another _strong_ line
+
+.Indented with quotes substitution
+[subs="quotes"]
+  This is a *bold* a line
+  This is a 'strong' line
+  This is another _strong_ line
+
+.Literal paragraph with quotes substitution
+["literal",subs="quotes"]
+This is a *bold* a line
+This is a 'strong' line
+This is another _strong_ line
+
+ifndef::backend-docbook[]
+.Monospaced paragraph with line breaks
++This is a *bold* line+ +
++This is a 'strong' line+ +
++This is another _strong_ line+
+
+
+.Another monospaced paragraph with line breaks
++This is a *bold* a line +
+This is a 'strong' line +
+This is another _strong_ line+
+
+endif::backend-docbook[]
+
+.Literal block with quotes substitution
+[subs="quotes"]
+.............................
+This is a *bold* a line
+This is a 'strong' line
+This is another _strong_ line
+.............................
+
+
+URLs
+----
+Mail Addresses
+~~~~~~~~~~~~~~
+joe_bloggs@mail_server.com_
+
+joe-bloggs@mail-server.com.
+
+joe-bloggs@mail-server.com,joe-bloggs@mail-server.com,
+
+mailto:joe-bloggs@mail-server.com[Mail]
+
+mailto:joe_bloggs@mail_server.com[Mail]
+
+mailto:joe.bloggs@mail.server.com[Mail]
+
+joe.bloggs@mail.server.com +
+lorum ipsum.
+
+
+Comments
+--------
+/////////////////////////////////////////////////////////////////////
+A comment
+block.
+/////////////////////////////////////////////////////////////////////
+
+// This is a comment line.
+
+Qui in magna commodo, est labitur dolorum an. Est ne magna primis.
+// Inline comment line.
+adolescens. Sit munere ponderum dignissim et. Minim luptatum et.
+
+:showcomments:
+// This comment line will be displayed in the output.
+
+Qui in magna commodo, est labitur dolorum an. Est ne magna primis.
+// Visible inline comment line.
+adolescens. Sit munere ponderum dignissim et. Minim luptatum et.
+
+/////////////////////////////////////////////////////////////////////
+Comment blocks are never displayed in the output.
+/////////////////////////////////////////////////////////////////////
+
+:showcomments!:
+
+
+ifdef::basebackend-docbook[]
+[glossary]
+List of terms
+-------------
+Using positional attribute to specify section template.
+
+[glossary]
+A glossary term::
+  The corresponding (indented) definition.
+
+A second glossary term::
+  The corresponding (indented) definition.
+
+[template="glossary"]
+List of terms
+-------------
+Using named 'template' attribute to specify section template.
+
+[glossary]
+A glossary term::
+  The corresponding (indented) definition.
+
+A second glossary term::
+  The corresponding (indented) definition.
+
+endif::basebackend-docbook[]
